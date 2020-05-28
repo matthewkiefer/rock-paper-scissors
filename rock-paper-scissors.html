@@ -2,12 +2,86 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Tic-Tac-Toe</title>
+  <title>paper-rock-scissors</title>
 </head>
 <body>
 
   <script>
-  
+
+    let playerSelectionCased;
+    let computerSelectionCased;
+    let playerScore = 0;
+    let computerScore = 0;
+
+    function game() {
+      let playerPrompt = prompt("What's your move?", "Paper?");   
+      let roundResult = playRound(playerPrompt, computerPlay());  
+      console.log(roundResult); 
+      playerPrompt = prompt("What's your move?", "Paper?");   
+      roundResult = playRound(playerPrompt, computerPlay());  
+      console.log(roundResult); 
+      playerPrompt = prompt("What's your move?", "Paper?");   
+      roundResult = playRound(playerPrompt, computerPlay());  
+      console.log(roundResult); 
+      playerPrompt = prompt("What's your move?", "Paper?");   
+      roundResult = playRound(playerPrompt, computerPlay());  
+      console.log(roundResult); 
+      playerPrompt = prompt("What's your move?", "Paper?");   
+      roundResult = playRound(playerPrompt, computerPlay());  
+      console.log(roundResult); 
+      console.log(`The final score is player: ${playerScore} to computer: ${computerScore}!`);
+    }
+    function computerPlay() {
+        let randSelector = Math.floor(Math.random()*3 + 1);
+        if (randSelector == 1) return "Rock" 
+        if (randSelector == 2)  return "Paper" 
+        else return "Scissors" ;
+    }
+
+    function playRound(playerSelectionCased, computerSelectionCased) {
+      
+      let playerSelection = playerSelectionCased.toLowerCase();
+      let computerSelection = computerSelectionCased.toLowerCase();
+
+      function playerLoses() {
+        computerScore++;
+        return `You lose! ${computerSelection} beats ${playerSelection}!`;
+      }
+
+      function playerWins() {
+        playerScore++;
+        return `You win! ${playerSelection} beats ${computerSelection}!`;
+      }
+
+      function tieAnnouncement() {
+        return "Tie! Play again!";
+      }
+
+      if (computerSelection == "paper" && playerSelection == "rock") {
+          return playerLoses();
+      }
+      if (computerSelection == "rock" && playerSelection == "scissors") {
+          return playerLoses();
+      }
+      if (computerSelection == "scissors" && playerSelection == "paper") {
+          return playerLoses();
+      }
+      if (computerSelection == playerSelection) {
+        return tieAnnouncement();
+      }
+      if (playerSelection == "paper" && computerSelection == "rock") {
+          return playerWins();
+      }
+      if (playerSelection == "rock" && computerSelection == "scissors") {
+        return playerWins();
+      }
+      if (playerSelection == "scissors" && computerSelection == "paper") {
+        return playerWins();
+      }
+    }
+
+    game();
+
   </script>
 </body>
 </html>
